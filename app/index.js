@@ -48,26 +48,26 @@ router.get('/analytics', function(request, response) {
 
 router.post('/contact',function(request, response) {
   if(request.body) {
-    var contactsDetails = new Contacts();
+//    var contactsDetails = new Contacts();
 
-    /*
+
     console.log(" value request.body.name",request.body.name);
     console.log(" value request.body.email",request.body.email);
     console.log(" value request.body.phoneno",request.body.phoneno);
     console.log(" value request.body.name",request.body.subject);
     console.log(" value request.body.name",request.body.message);
-
-    console.log("contacts details",JSON.stringify(contactsDetails)); */
-    
+}
+    //console.log("contacts details",JSON.stringify(contactsDetails));
+  /*
     contactsDetails.name    = request.body.name;
     contactsDetails.email   = request.body.email;
     contactsDetails.phoneno = request.body.phoneno;
     contactsDetails.subject = request.body.subject;
 
-    contactsDetails.message = request.body.message; 
+    contactsDetails.message = request.body.message;
      //UserQuery;
     contactsDetails.save(function (err) {
-      
+
     if (err) {
       return err;
     }
@@ -81,7 +81,7 @@ router.post('/contact',function(request, response) {
   if(request.body.email == "" || request.body.subject == "") {
    response.send("Error: Email & Subject should not blank");
    return false; }
-
+*/
    var smtpTransport = nodemailer.createTransport("SMTP",{
              host: "smtp.gmail.com", // hostname
     secureConnection: true, // use SSL
@@ -117,8 +117,8 @@ router.post('/contact',function(request, response) {
         }
       //else{ response.send("Email has been sent successfully");  }
     });
+    response.render('contact.html');
 });
 
 
 module.exports = router;
-

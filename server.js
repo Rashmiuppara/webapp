@@ -2,7 +2,10 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
-    
+    var routes = require('./app/index');
+    app.use('/', routes);
+
+
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var path = require('path');
@@ -23,7 +26,7 @@ app.set('views', path.join(__dirname, '/views'));
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8081,
     ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
@@ -70,7 +73,7 @@ var initDb = function(callback) {
     console.log('Connected to MongoDB at: %s', mongoURL);
   });
 };
-
+/*
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
@@ -103,6 +106,7 @@ app.get('/pagecount', function (req, res) {
     res.send('{ pageCount: -1 }');
   }
 });
+*/
 
 // error handling
 app.use(function(err, req, res, next){
