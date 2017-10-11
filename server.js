@@ -3,8 +3,23 @@ var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
     
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+var path = require('path');
+
+var routes = require('./app/index');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+
+console.log("__dirname ",__dirname);
+app.use(express.static(path.join(__dirname, '/public')));
+
 Object.assign=require('object-assign')
 
+
+app.set('views', path.join(__dirname, '/views'));
 app.engine('html', require('ejs').renderFile);
 app.use(morgan('combined'))
 
