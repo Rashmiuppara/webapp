@@ -2,7 +2,7 @@
 var express = require('express'),
     app     = express(),
     morgan  = require('morgan');
-    var routes = require('./app/index');
+
 
 
 
@@ -51,7 +51,7 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   }
 }
 
-/*
+
 var db = null,
     dbDetails = new Object();
 
@@ -94,21 +94,6 @@ app.get('/', function (req, res) {
   }
 });
 
-app.get('/pagecount', function (req, res) {
-  // try to initialize the db on every request if it's not already
-  // initialized.
-  if (!db) {
-    initDb(function(err){});
-  }
-  if (db) {
-    db.collection('counts').count(function(err, count ){
-      res.send('{ pageCount: ' + count + '}');
-    });
-  } else {
-    res.send('{ pageCount: -1 }');
-  }
-});
-*/
 
 app.use('/', routes);
 
@@ -118,11 +103,11 @@ app.use(function(err, req, res, next){
   res.status(500).send('Something bad happened!');
 });
 
-/*
+
 initDb(function(err){
   console.log('Error connecting to Mongo. Message:\n'+err);
 });
-*/
+
 
 app.listen(port, ip);
 console.log('Server running on http://%s:%s', ip, port);
